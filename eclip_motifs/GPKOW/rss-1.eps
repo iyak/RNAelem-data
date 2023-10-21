@@ -1,0 +1,71 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox:-42.5567 -10.5235 21.1001 113.375
+/mapa {
+  6 dict begin
+  /f exch def /a1 exch def /n a1 length def /a2 n array def
+  0 1 n 1 sub {/i exch def /e a1 i get def a2 i e f put} for
+  a2 end
+} bind def
+/drawpairs {
+  gsave newpath 0.7 setgray 3 setlinewidth [7 4.01] 7 setdash
+  pairs {aload pop xy exch get aload pop moveto xy exch get aload pop lineto} forall
+  stroke grestore
+} bind def
+/fxy {exch xy exch get aload pop 3 -1 roll exec} bind def % int proc fxy -
+/drawbackbone {
+  gsave newpath 0.2 setgray 0.8 setlinewidth
+  1 {moveto} fxy -1 gaps aload pop 1 {2 copy eq {3 add {moveto} fxy 4 add}
+    {dup {lineto} fxy 1 add} ifelse dup xy length 1 sub ge {exit} if} loop
+  stroke grestore
+} bind def
+/drawgaps {
+  gsave newpath 0.2 setgray 0.8 setlinewidth [1 3] 0 setdash
+  gaps {1 sub dup {moveto} fxy 1 add dup {lineto} fxy
+    2 add dup {moveto} fxy 1 add {lineto} fxy} forall
+  stroke grestore
+} bind def
+/drawends {
+  gsave newpath 0.2 setgray 0.8 setlinewidth [1 3] 0 setdash
+  0 {moveto} fxy 1 {lineto} fxy
+  xy length 2 sub {moveto} fxy xy length 1 sub {lineto} fxy
+  stroke grestore
+} bind def
+/drawloop {
+  gsave newpath 0 setgray 1.5 setlinewidth
+  unpairs {xy exch get aload pop 2 copy moveto 0.5 0 360 arc} forall
+  stroke grestore
+} bind def
+/drawbases {
+  gsave newpath 0 setgray 0.8 setlinewidth
+  0 xy {{2.4 sub} mapa aload pop moveto dup seq exch 1 getinterval false charpath
+    gsave 2.5 setlinewidth 1 setgray stroke grestore fill 1 add} forall
+  stroke grestore
+} bind def
+/xy [
+[0 0]
+[-14.9909 -0.523492]
+[-27.4264 7.8644]
+[-32.5567 21.9598]
+[-28.4222 36.3787]
+[-16.602 45.6136]
+[-17.1255 60.6045]
+[-28.9457 69.8394]
+[-32.0643 84.5116]
+[-25.0223 97.7559]
+[-11.1145 103.375]
+[3.15134 98.7397]
+[11.1001 86.019]
+[9.01254 71.165]
+[-2.13464 61.128]
+[-1.61114 46.1371]
+[10.8244 37.7492]
+] def
+/pairs [
+[5 15]
+[6 14]
+] def
+/unpairs [0 1 2 3 4 10 11 12 13 16 ] def
+/gaps [7 ] def
+/seq (5  U      G  G  3) def
+/Courier findfont 8 scalefont setfont 1 setlinejoin 1 setlinecap
+drawbackbone drawgaps drawpairs drawends drawloop drawbases showpage

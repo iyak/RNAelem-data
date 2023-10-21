@@ -1,0 +1,58 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox:-35.4176 -10 10.632 46.4695
+/mapa {
+  6 dict begin
+  /f exch def /a1 exch def /n a1 length def /a2 n array def
+  0 1 n 1 sub {/i exch def /e a1 i get def a2 i e f put} for
+  a2 end
+} bind def
+/drawpairs {
+  gsave newpath 0.7 setgray 3 setlinewidth [7 4.01] 7 setdash
+  pairs {aload pop xy exch get aload pop moveto xy exch get aload pop lineto} forall
+  stroke grestore
+} bind def
+/fxy {exch xy exch get aload pop 3 -1 roll exec} bind def % int proc fxy -
+/drawbackbone {
+  gsave newpath 0.2 setgray 0.8 setlinewidth
+  1 {moveto} fxy -1 gaps aload pop 1 {2 copy eq {3 add {moveto} fxy 4 add}
+    {dup {lineto} fxy 1 add} ifelse dup xy length 1 sub ge {exit} if} loop
+  stroke grestore
+} bind def
+/drawgaps {
+  gsave newpath 0.2 setgray 0.8 setlinewidth [1 3] 0 setdash
+  gaps {1 sub dup {moveto} fxy 1 add dup {lineto} fxy
+    2 add dup {moveto} fxy 1 add {lineto} fxy} forall
+  stroke grestore
+} bind def
+/drawends {
+  gsave newpath 0.2 setgray 0.8 setlinewidth [1 3] 0 setdash
+  0 {moveto} fxy 1 {lineto} fxy
+  xy length 2 sub {moveto} fxy xy length 1 sub {lineto} fxy
+  stroke grestore
+} bind def
+/drawloop {
+  gsave newpath 0 setgray 1.5 setlinewidth
+  unpairs {xy exch get aload pop 2 copy moveto 0.5 0 360 arc} forall
+  stroke grestore
+} bind def
+/drawbases {
+  gsave newpath 0 setgray 0.8 setlinewidth
+  0 xy {{2.4 sub} mapa aload pop moveto dup seq exch 1 getinterval false charpath
+    gsave 2.5 setlinewidth 1 setgray stroke grestore fill 1 add} forall
+  stroke grestore
+} bind def
+/xy [
+[0 0]
+[-14.9977 0.261786]
+[-25.4176 11.0519]
+[-25.1558 26.0496]
+[-14.3657 36.4695]
+[0.632008 36.2077]
+] def
+/pairs [
+] def
+/unpairs [0 1 2 3 4 5 ] def
+/gaps [] def
+/seq (5GGA 3) def
+/Courier findfont 8 scalefont setfont 1 setlinejoin 1 setlinecap
+drawbackbone drawgaps drawpairs drawends drawloop drawbases showpage
